@@ -25,7 +25,7 @@ namespace CinemaApp
         // Visszatér false ha nincs szabad hely, vagy a személy már foglalt
         public bool BookSeat(string name)
         {
-            if (_bookedNames.Count < _totalSeats)
+            if (_bookedNames.Count < _totalSeats && !_bookedNames.Contains(name.Trim()))
             {
                 _bookedNames.Add(name.Trim());
                 return true;
