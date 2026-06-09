@@ -85,8 +85,24 @@ namespace CinemaApp.Tests
             Assert.IsTrue(result);
             Assert.AreEqual(5, screening.GetAvailableSeats());
         }
+
         // TODO: nem létező foglalás lemondásakor false-t kell visszaadni
+        [TestMethod]
+        public void CancelBooking_NonExistent()
+        {
+            var screening = CreateDefaultScreening();
+            Assert.IsFalse(screening.CancelBooking("Alice"));
+        }
+
         // TODO: lemondás után a személy neve már nem szerepel a foglaltak között
+        [TestMethod]
+        public void CancelBooking_NotBookedAnymore()
+        {
+            var screening = CreateDefaultScreening();
+            screening.BookSeat("Alice");
+            screening.CancelBooking("Alice");
+            Assert.IsFalse(screening.IsBooked("Alice"));
+        }
 
         // ---- IsBooked ----
 
