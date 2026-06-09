@@ -170,8 +170,25 @@ namespace CinemaApp.Tests
             screening.BookSeat("Bob");
             Assert.AreEqual(2, screening.GetBookedCount());
         }
+
         // TODO: újonnan létrehozott vetítésnél GetBookedCount() nullát kell visszaadni
+        [TestMethod]
+        public void GetBookedCount_NoBookingsByDefault()
+        {
+            var screening = CreateDefaultScreening();
+            Assert.AreEqual(0, screening.GetBookedCount());
+        }
+
         // TODO: lemondás után a foglaltak száma helyesen csökken
+        [TestMethod]
+        public void GetBookedCount_BookingChangeTest()
+        {
+            var screening = CreateDefaultScreening();
+            screening.BookSeat("Alice");
+            screening.BookSeat("Bob");
+            screening.CancelBooking("Alice");
+            Assert.AreEqual(1, screening.GetBookedCount());
+        }
 
         // ---- IsHouseFull ----
 
