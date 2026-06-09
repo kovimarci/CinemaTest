@@ -17,9 +17,23 @@ namespace CinemaApp.Tests
             Assert.AreEqual("Inception", screening.GetTitle());
             Assert.AreEqual(100, screening.GetAvailableSeats());
         }
-        // TODO: null vagy üres cím esetén ArgumentException-t kell dobni
-        // TODO: totalSeats értéke 0 vagy negatív esetén ArgumentException-t kell dobni
 
+        // TODO: null vagy üres cím esetén ArgumentException-t kell dobni
+        [TestMethod]
+        public void Constructor_NameTest()
+        {
+            Assert.ThrowsException<ArgumentException>(() => new Screening("", 100));
+            Assert.ThrowsException<ArgumentException>(() => new Screening(null, 100));
+        }
+
+        // TODO: totalSeats értéke 0 vagy negatív esetén ArgumentException-t kell dobni
+        [TestMethod]
+        public void Constructor_SeatTest()
+        {
+            Assert.ThrowsException<ArgumentException>(() => new Screening("Matrix", 0));
+            Assert.ThrowsException<ArgumentException>(() => new Screening("Matrix", -100));
+        }
+        
         // ---- BookSeat ----
 
         [TestMethod]
