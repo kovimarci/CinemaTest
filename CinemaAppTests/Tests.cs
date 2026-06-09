@@ -44,9 +44,35 @@ namespace CinemaApp.Tests
             Assert.IsTrue(result);
             Assert.AreEqual(4, screening.GetAvailableSeats());
         }
+
         // TODO: teli vetítésnél újabb foglalás false-t kell hogy visszaadjon
+        [TestMethod]
+        public void BookSeat_FullHouse()
+        {
+            var screening = new Screening("Inception", 1);
+            screening.BookSeat("Alice");
+            Assert.IsFalse(screening.BookSeat("Daniel"));
+        }
+
         // TODO: ugyanaz a személy kétszer próbál foglalni, másodszor false-t kell kapni
+        [TestMethod]
+        public void BookSeat_SamePerson()
+        {
+            var screening = new Screening("Inception", 1);
+            screening.BookSeat("Alice");
+            Assert.IsFalse(screening.BookSeat("Alice"));
+        }
+
         // TODO: több különböző személy foglalása után a szabad helyek száma helyesen csökken
+        [TestMethod]
+        public void BookSeat_ReservationTest()
+        {
+            var screening = new Screening("Inception", 5);
+            screening.BookSeat("Alice");
+            screening.BookSeat("Daniel");
+            screening.BookSeat("Bob");
+            Assert.AreEqual(2, screening.GetAvailableSeats());
+        }
 
         // ---- CancelBooking ----
 
