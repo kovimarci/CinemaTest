@@ -200,8 +200,25 @@ namespace CinemaApp.Tests
             screening.BookSeat("Bob");
             Assert.IsTrue(screening.IsHouseFull());
         }
+
         // TODO: szabad hellyel rendelkező vetítésnél false-t kell visszaadni
+        [TestMethod]
+        public void IsHouseFull_NotFull()
+        {
+            var screening = new Screening("Inception", 2);
+            Assert.IsFalse(screening.IsHouseFull());
+        }
+
         // TODO: lemondás után a vetítés már nem teli, IsHouseFull() false-t ad vissza
+        [TestMethod]
+        public void IsHouseFull_FreedSeat()
+        {
+            var screening = new Screening("Inception", 1);
+            screening.BookSeat("Alice");
+            screening.CancelBooking("Alice");
+            Assert.IsFalse(screening.IsHouseFull());
+        }
+
 
         // -------------------------------------------------------
         // EXTRA FELADAT — Várólista tesztek
