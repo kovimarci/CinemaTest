@@ -142,8 +142,23 @@ namespace CinemaApp.Tests
             screening.BookSeat("Bob");
             Assert.AreEqual(3, screening.GetAvailableSeats());
         }
+
         // TODO: újonnan létrehozott vetítésnél a szabad helyek száma egyenlő a totalSeats értékével
+        [TestMethod]
+        public void GetAvailableSeats_EqualSeats()
+        {
+            var screening = CreateDefaultScreening();
+            Assert.AreEqual(5, screening.GetAvailableSeats());
+        }
+
         // TODO: teli vetítésnél GetAvailableSeats() nullát kell visszaadni
+        [TestMethod]
+        public void GetAvailableSeats_NoSeatsLeft()
+        {
+            var screening = new Screening("Matrix", 1);
+            screening.BookSeat("Alice");
+            Assert.AreEqual(0, screening.GetAvailableSeats());
+        }
 
         // ---- GetBookedCount ----
 
