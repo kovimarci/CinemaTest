@@ -113,8 +113,24 @@ namespace CinemaApp.Tests
             screening.BookSeat("Alice");
             Assert.IsTrue(screening.IsBooked("Alice"));
         }
+
         // TODO: foglalás nélküli személyre false-t kell visszaadni
+        [TestMethod]
+        public void IsBooked_NotBooked()
+        {
+            var screening = CreateDefaultScreening();
+            Assert.IsFalse(screening.IsBooked("Bob"));
+        }
+
         // TODO: lemondás után ugyanarra a személyre false-t kell visszaadni
+        [TestMethod]
+        public void IsBooked_NotBookedAnymore()
+        {
+            var screening = CreateDefaultScreening();
+            screening.BookSeat("Alice");
+            screening.CancelBooking("Alice");
+            Assert.IsFalse(screening.IsBooked("Alice"));
+        }
 
         // ---- GetAvailableSeats ----
 
